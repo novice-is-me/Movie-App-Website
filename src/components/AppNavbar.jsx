@@ -9,9 +9,9 @@ const AppNavbar = () => {
     const { token } = useContext(TokenContext);
 
     return ( 
-        <Navbar expand="lg" className="bg-warning">
+        <Navbar expand="lg" className=" bg-dark-subtle">
             <Container>
-                <Navbar.Brand as={Link} to="/" className='d-flex text-white me-auto fs-2 align-items-center'>
+                <Navbar.Brand as={Link} to="/" className='d-flex  me-auto fs-2 align-items-center'>
                     Movie Website
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -19,12 +19,12 @@ const AppNavbar = () => {
                     <Nav className="ms-auto">
                         {token ? (
                             <>
-                                <Nav.Link as={Link} to="/logout" className='text-white fs-3'>Logout</Nav.Link>
+                                <Nav.Link as={Link} to="/logout" className=' fs-3'>Logout</Nav.Link>
                             </>
                         ) : (
                             <>
-                            <Nav.Link as={NavLink} to="/login" exact="true" className='text-white fs-4 me-3'>Login</Nav.Link>
-                            <Nav.Link as={NavLink} to="/register" exact="true" className='text-white fs-4'>Register</Nav.Link>
+                            <Nav.Link as={NavLink} to="/login" exact="true" className=' fs-4 me-3'>Login</Nav.Link>
+                            <Nav.Link as={NavLink} to="/register" exact="true" className=' fs-4'>Register</Nav.Link>
                             </>
                         )}
                     </Nav>

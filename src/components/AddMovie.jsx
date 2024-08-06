@@ -60,14 +60,14 @@ const AddMovie = () => {
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Movie Name</Form.Label>
                 <Form.Control type="text" 
-                    placeholder="Add Workout" 
+                    placeholder="Add Movie" 
                     value={title}
                     onChange={(e) => setTitle(e.target.value)} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                 <Form.Label>Description</Form.Label>
                 <Form.Control type='text'
-                    placeholder="Duration"
+                    placeholder="Description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     />
@@ -75,7 +75,7 @@ const AddMovie = () => {
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                 <Form.Label>Director</Form.Label>
                 <Form.Control type='text'
-                    placeholder="Duration"
+                    placeholder="Director"
                     value={director}
                     onChange={(e) => setDirector(e.target.value)}
                     />
@@ -83,7 +83,7 @@ const AddMovie = () => {
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                 <Form.Label>Genre</Form.Label>
                 <Form.Control type='text'
-                    placeholder="Duration"
+                    placeholder="Genre"
                     value={genre}
                     onChange={(e) => setGenre(e.target.value)}
                     />
@@ -91,7 +91,7 @@ const AddMovie = () => {
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                 <Form.Label>Year</Form.Label>
                 <Form.Control type='number'
-                    placeholder="Duration"
+                    placeholder="Year"
                     value={year}
                     onChange={(e) => setYear(e.target.value)}
                     />

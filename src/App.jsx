@@ -15,26 +15,31 @@ import Logout from './pages/Logout';
 export const TokenContext = createContext();
 
 function App() {
-
+ 
   const [token, setToken] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
 
-  useEffect(() =>{
-    setToken(localStorage.getItem('token'));
-  },[token]);
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
 
-  if (token) {
-    try {
-      const decodedToken = jwtDecode(token);
-      
-      isAdmin = decodedToken.role === 'admin'; 
-    } catch (error) {
-      console.error('Error decoding token:', error);
+    if (storedToken) {
+        setToken(storedToken);
+        const decodedToken = jwtDecode(storedToken);
+        console.log('Decoded Token:', decodedToken); 
+       
+        if (decodedToken.isAdmin === true) {
+          setIsAdmin(true);
+        } else {
+          setIsAdmin(false);
+        }
     }
-  } 
+  }, []);
 
-  console.log(isAdmin);
-
+  useEffect(() =>{
+    console.log('Token:', token);
+    console.log('isAdmin:', isAdmin);
+  })
+  
   return (
     <>
       <Router>

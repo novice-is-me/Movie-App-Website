@@ -1,7 +1,7 @@
 import { Button, Form, Alert } from 'react-bootstrap';
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation, Link } from 'react-router-dom';
-
+import Swal from 'sweetalert2';
 
 const Comments = () => {
   const { movieId } = useParams();
@@ -24,10 +24,17 @@ const Comments = () => {
       .then(res => res.json())
       .then(data => {
         if (data && Array.isArray(data.comments)) {
-            setComments(data.comments);
-          } else {
-            console.error('Unexpected data format:', data);
-          }
+          
+          const uniqueComments = data.comments.reduce((acc, comment) => {
+            if (!acc.find(c => c._id === comment._id)) {
+              acc.push(comment);
+            }
+            return acc;
+          }, []);
+          setComments(uniqueComments);
+        } else {
+          console.error('Unexpected data format:', data);
+        }
       })
       .catch(err => {
         console.error('Error fetching comments:', err);
@@ -44,7 +51,7 @@ const Comments = () => {
     e.preventDefault();
     
     fetch(`${import.meta.env.VITE_API_URL}/movies/addComment/${movie._id}`, {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -53,15 +60,27 @@ const Comments = () => {
     })
       .then(res => res.json())
       .then(data => {
-        if (data && Array.isArray(data.comment)) {
-
-          setComments([...comments, ...data.comments]); 
+        if (data && data.updatedMovie) {
+          
+          const uniqueComments = data.updatedMovie.comments.reduce((acc, comment) => {
+            if (!acc.find(c => c._id === comment._id)) {
+              acc.push(comment);
+            }
+            return acc;
+          }, []);
+          setComments(uniqueComments);
           setNewComment('');
-          setSuccess('Comment added successfully!');
-          setError('');
+          Swal.fire({
+            title: 'Success',
+            text: 'Comment added successfully',
+            icon: 'success',
+          })
         } else {
-          setError('Failed to add comment.');
-          setSuccess('');
+          Swal.fire({
+            title: 'Error',
+            text: 'Failed to add comment',
+            icon: 'error',
+          })
         }
       })
       .catch(err => {
@@ -107,7 +126,6 @@ const Comments = () => {
       </Form>
     </div>
   );
-  
 };
 
 export default Comments;

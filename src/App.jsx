@@ -33,13 +33,13 @@ function App() {
           setIsAdmin(false);
         }
     }
-  }, []);
+  }, [token]);
 
   useEffect(() =>{
     console.log('Token:', token);
     console.log('isAdmin:', isAdmin);
   })
-  
+
   return (
     <>
       <Router>
